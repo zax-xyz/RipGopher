@@ -4,21 +4,6 @@ import itertools
 import time
 import traceback
 
-Host = "irc.twitch.tv"
-Port = 6667
-Owner = 'zaxu__'  # Put username in lowercase
-
-with open("auth", "r", encoding='utf-8') as auth_file:
-    line = auth_file.readline().split()
-    Nick = line[0].lower()
-    Pass = line[1]
-    Channel = line[2]
-
-with open("kill_count.txt", "r", encoding='utf-8') as kill_file:
-    line = kill_file.readline().strip()
-    kill_count = int(line[0] or 0)
-    raw_count = int(line[1] or kill_count)
-
 def current_time():
     t = datetime.datetime.now()
     return t.strftime("%y-%m-%d %H:%M:%S ")
@@ -103,6 +88,21 @@ def handle_commands():
         send_message(f"Set gopher death count to {kill_count}.")
 
 if __name__ == '__main__':
+    Host = "irc.twitch.tv"
+    Port = 6667
+    Owner = 'zaxu__'  # Put username in lowercase
+
+    with open("auth", "r", encoding='utf-8') as auth_file:
+        line = auth_file.readline().split()
+        Nick = line[0].lower()
+        Pass = line[1]
+        Channel = line[2]
+
+    with open("kill_count.txt", "r", encoding='utf-8') as kill_file:
+        line = kill_file.readline().strip()
+        kill_count = int(line[0] or 0)
+        raw_count = int(line[1] or kill_count)
+
     connect()
 
     while True:
